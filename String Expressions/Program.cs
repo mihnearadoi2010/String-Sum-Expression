@@ -11,7 +11,6 @@ namespace String_Expressions
             
             ExpressionSolver solver = new ExpressionSolver();
             Console.Write(solver.Solve(input));
-
         }
     }
 }
