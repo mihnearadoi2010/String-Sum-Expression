@@ -72,8 +72,9 @@ namespace String_Expressions
                 {
                     value %= Solve(operation.operations[i]);
                 }
+                //test git
             }
-
+             
             return value;
         }
     }
