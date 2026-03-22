@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="String Expressions/String Expressions.csproj" Id="35bbe081-fc78-4859-929d-4d03d05ce0f5" />
+  <Project Path="StringExpressionsTester/StringExpressionsTester.csproj" Id="c3595bd3-0bc2-4e37-89b3-306b2ea91f02" />
 </Solution>

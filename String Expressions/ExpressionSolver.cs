@@ -1,11 +1,10 @@
-﻿
-using System;
+﻿using System;
 
 namespace String_Expressions
 {
-    internal class ExpressionSolver
+    public class ExpressionSolver
     {
-        public int Solve(string input)
+        public float Solve(string input)
         {
             StringParser parser = new StringParser();
             Operation operation = parser.Parser(input);
@@ -13,64 +12,64 @@ namespace String_Expressions
             return Solve(operation);
         }
 
-        private int Solve(Operation operation)
+        private float Solve(Operation operation)
         {
-            if (operation.val != null)
+            if (operation.Val != null)
             {
-                return Convert.ToInt32(operation.val);
+                return Convert.ToInt32(operation.Val);
             }
 
-            int value = 0;
-            if (operation.sign == '+')
+            float value = 0;
+            if (operation.Sign == '+')
             {
                 value = 0;
 
-                foreach (var innerOperation in operation.operations)
+                foreach (var innerOperation in operation.Operations)
                 {
                     value += Solve(innerOperation);
                 }
             }
-            else if (operation.sign == '-')
+            else if (operation.Sign == '-')
             {
-                if (operation.operations.Count == 1)
+                if (operation.Operations.Count == 1)
                 {
-                    value -= Solve(operation.operations[0]);
+                    value -= Solve(operation.Operations[0]);
                 }
                 else
                 {
-                    value = Solve(operation.operations[0]);
+                    value = Solve(operation.Operations[0]);
 
-                    for (int i = 1; i < operation.operations.Count; i++)
+                    for (int i = 1; i < operation.Operations.Count; i++)
                     {
-                        value -= Solve(operation.operations[i]);
+                        value -= Solve(operation.Operations[i]);
                     }
                 }
             }
-            else if (operation.sign == '*')
+            else if (operation.Sign == '*')
             {
                 value = 1;
 
-                foreach (var innerOperation in operation.operations)
+                foreach (var innerOperation in operation.Operations)
                 {
                     value *= Solve(innerOperation);
                 }
             }
-            else if (operation.sign == '/')
+            else if (operation.Sign == '/')
             {
-                value = Solve(operation.operations[0]);
+                value = Solve(operation.Operations[0]);
 
-                for (int i = 1; i < operation.operations.Count;i++)
+                for (int i = 1; i < operation.Operations.Count;i++)
                 {
-                    value /= Solve(operation.operations[i]);
+                    value /= Solve(operation.Operations[i]);
                 }                
             }
-            else if (operation.sign == '%')
+            else if (operation.Sign == '%')
             {
-                value = Solve(operation.operations[0]);
+                value = Solve(operation.Operations[0]);
 
-                for (int i = 1; i < operation.operations.Count; i++)
+                for (int i = 1; i < operation.Operations.Count; i++)
                 {
-                    value %= Solve(operation.operations[i]);
+                    value %= Solve(operation.Operations[i]);
                 }
             }
              

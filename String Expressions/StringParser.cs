@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace String_Expressions
 {
-    internal class StringParser
+    public class StringParser
     {
         public Operation Parser(string input)
         {
@@ -21,16 +20,16 @@ namespace String_Expressions
 
             if (chars[index] != "(")
             {
-                operation.val = Convert.ToInt32(chars[index++]);
+                operation.Val = Convert.ToInt32(chars[index++]);
                 return operation;
             }
 
             index++;
-            operation.sign = Convert.ToChar(chars[index++]);
+            operation.Sign = Convert.ToChar(chars[index++]);
 
             while (chars[index] != ")")
             {
-                operation.operations.Add(Parser(chars, ref index));
+                operation.Operations.Add(Parser(chars, ref index));
             }
 
             index++;
@@ -52,7 +51,7 @@ namespace String_Expressions
 
             if (int.TryParse(input, out int value))
             {
-                operation.val = value;
+                operation.Val = value;
                 return operation;
             }
 
@@ -60,9 +59,9 @@ namespace String_Expressions
             {
                 var currentChar = input[i];
 
-                if (signs.Contains(currentChar) && operation.sign == null)
+                if (signs.Contains(currentChar) && operation.Sign == null)
                 {
-                    operation.sign = currentChar;
+                    operation.Sign = currentChar;
                 }
 
                 if (currentChar == '(')
@@ -83,7 +82,7 @@ namespace String_Expressions
                         if (paranthesis.Count == 0)
                         {
                             var newOperation = input.Substring(i, j - i + 1);
-                            operation.operations.Add(Parser2(newOperation));
+                            operation.Operations.Add(Parser2(newOperation));
                             i = j;
                             break;
                         }
@@ -92,7 +91,7 @@ namespace String_Expressions
                 if (input[i - 1] == ' ' && char.IsDigit(currentChar))
                 {
                     var newOperation = input.Substring(i, input.IndexOf(' ', i) - i);
-                    operation.operations.Add(Parser2(newOperation));
+                    operation.Operations.Add(Parser2(newOperation));
                 }
             }
 
